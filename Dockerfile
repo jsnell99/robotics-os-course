@@ -1,5 +1,5 @@
 # parameters
-ARG REPO_NAME="Snell ROS EECE5560"
+ARG REPO_NAME="robotics-os-course"
 ARG DESCRIPTION= " Repo for UML EECE 5560"
 ARG MAINTAINER="Jeffrey Snell (jeffrey_snell@student.uml.edu)"
 # pick an icon from: https://fontawesome.com/v4.7.0/icons/

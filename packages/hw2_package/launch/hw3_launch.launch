@@ -21,6 +21,6 @@
 	</group>
 	
 	
-	<node pkg="rostopic" name="rostopic" type="rostopic" output="screen" args="echo hw3_unit_converted" />
+	<node pkg="rostopic" name="rostopic" type="rostopic" output="screen" args="echo homework3/hw3_unit_converted" />
 	
 </launch>

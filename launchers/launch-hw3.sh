@@ -1,7 +1,7 @@
 #!/bin/bash
 
-HW_PACKAGE="learning_ros"
-HW_LAUNCH="hw3.launch"
+HW_PACKAGE="hw2_package"
+HW_LAUNCH="hw3_launch.launch"
 
 source /environment.sh
 

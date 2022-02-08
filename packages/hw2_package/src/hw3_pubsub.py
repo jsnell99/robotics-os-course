@@ -2,43 +2,30 @@
 
 import random
 import rospy
-from mystery_package.msg import UnitsLabelled #maybe correct?
+from mystery_package.msg import UnitsLabelled
 
 import rospy
 
-class Listener:
+class pubsubber:
 	def __init__(self):
-		rospy.Subscriber("/mystery/output2", UnitsLabelled, self.callback)
+		#self.pub_msg = UnitsLabelled()
+		#self.pub_msg.units = 'feet'
+		rospy.Subscriber("/mystery/output2", UnitsLabelled, self.callback)			#register subscriber with ROS
+		self.pub = rospy.Publisher('hw3_unit_converted', UnitsLabelled, queue_size=10)	#register publisher with ROS
+		
 	def callback(self, msg):
-		rospy.loginfo(rospy.get_caller_id() + "published {}".format(msg.data))
-
-
-if __name__ == '__main__':
-    rospy.init_node('listener', anonymous=True)
-    Listener()
-
-    # spin() simply keeps python from exiting until this node is stopped
-
-    rospy.spin()
-    
-    #######################################################################
-
-class Talker:
-	def __init__(self):
-		self.pub = rospy.Publisher('/hw3_unit_converted', UnitsLabelled, queue_size=10) 
+		rospy.loginfo(rospy.get_caller_id() + " published {}".format(msg))
+		msg.value = msg.value*3.28084
 		
-	def talk(self):
-		conversion = Listener.msg.data*3.28084
-		converted = "{} feet".format(converted)
-		rospy.loginfo(converted)
-		self.pub.publish(converted)
+		msg.units='feet'
+		#self.pub_msg.value = msg.value*3.28084
+		rospy.loginfo(msg)
+		self.pub.publish(msg)	#publish message
 		
 if __name__ == '__main__':
-	try:
-		rospy.init_node('talker', anonymous=True)
-		t = Talker()
-		rate = rospy.Rate(1)	#1 hz
-		while not rospy.is_shutdown():
-			t.talk()
-			rate.sleep()
-	except rospy.ROSInterruptException:
+	rospy.init_node('hw3_pubsub', anonymous=True)
+	pubsubber()
+	rospy.spin() # spin() simply keeps python from exiting until this node is stopped
+	
+	
+

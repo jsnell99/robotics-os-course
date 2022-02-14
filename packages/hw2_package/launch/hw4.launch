@@ -1,0 +1,32 @@
+<launch>
+
+	<group ns="mystery">
+		<node pkg="mystery_package" name="mystery_node" type="mystery_node.py"/>
+		<remap from="/mystery/output2" to="/homework4/hw3_unit_converted"/>
+		<node pkg="mystery_package" name="unit_listener" type="unit_listener.py"/>
+	
+	</group>
+	
+	
+	<group ns="homework2">
+
+		<node pkg="hw2_package" name="talker" type="hw2-node.py"/>
+		<node pkg="rqt_console" name="rqt_console" type="rqt_console" />
+		
+	</group>
+	
+	<group ns="homework4">
+	
+		<param name="unit" value="smoots" />
+		<node pkg="hw2_package" name="pubsub" type="hw4_converter.py"/>
+
+		
+		<node pkg="rqt_graph" name="rqt_graph" type="rqt_graph" />
+		<node pkg="rqt_console" name="rqt_console" type="rqt_console" />
+	
+	</group>
+	
+	
+	<node pkg="rostopic" name="rostopic" type="rostopic" output="screen" args="echo homework4/hw3_unit_converted" />
+	
+</launch>

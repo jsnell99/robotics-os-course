@@ -9,5 +9,7 @@
 		<node pkg="rqt_console" name="rqt_console" type="rqt_console" />
 	
 	</group>
-	<node pkg="rostopic" name="rostopic" type="rostopic" output="screen" args="echo /robot_coord"/>
+	<node pkg="rostopic" name="rostopic1" type="rostopic" output="screen" args="echo /robot_coord"/>
+	<node pkg="rostopic" name="rostopic2" type="rostopic" output="screen" args="echo /world_coord"/>
+	<node pkg="rostopic" name="rostopic3" type="rostopic" output="screen" args="echo /sensor_coord"/>
 </launch>

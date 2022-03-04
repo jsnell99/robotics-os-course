@@ -2,7 +2,7 @@
 
 import rospy
 import numpy as np
-from math import radians, sin, cos
+from math import radians, pi, sin, cos
 from duckietown_msgs.msg import Vector2D
 from std_msgs.msg import String
 
@@ -15,32 +15,25 @@ class transform:
 	def callback(self, msg):
 		rospy.loginfo(rospy.get_caller_id() + " published {}".format(msg))
 
-		#print(msg.value)
+		print(msg)
+		point = np.matrix([[msg.x],[msg.y],[1]])
 		theta_rw = 135/180*pi
 		theta_sr = pi
-		P_a = np.matrix[[18], [8], [1]]
-		P_b = np.matrix[[1], [-9], [1]]
-		P_c = np.matrix[[-11], [12], [1]]
-		P_d = np.matrix[[-20], [-18], [1]]
 
-		T_sr = np.matrix[[cos(theta_rw), -sin(theta_rw), -1], [sin(theta_rw), cos(theta_rw), 0], [0,0,1]]
-		T_rw = np.matrix[[cos(theta_sr), -sin(theta_sr), 3], [sin(theta_sr), cos(theta_sr), 2], [0,0,1]]
+		T_sr = np.matrix([[cos(theta_sr), -sin(theta_sr), -1], [sin(theta_sr), cos(theta_sr), 0], [0,0,1]])
+		T_rw = np.matrix([[cos(theta_rw), -sin(theta_rw), 3], [sin(theta_rw), cos(theta_rw), 2], [0,0,1]])
 		
-		P_ar = T_sr*P_a
-		P_br = T_sr*P_b
-		P_cr = T_sr*P_c
-		P_dr = T_sr*P_d
+		P_pr = T_sr*point
+		P_pw = T_rw*P_pr
 
-		P_aw = T_rw*P_ar
-		P_bw = T_rw*P_br
-		P_cw = T_rw*P_cr
-		P_dw = T_rw*P_dr
-		#T_rw = np.matrix[[-1/math.sqrt(2), -1/math.sqrt(2), 3], [1/math.sqrt(2), -1/math.sqrt(2), 2], [0,0,1]]
-	
-		self.pub1.publish(P_ar, P_br, P_cr, P_dr)	#publish message
-		self.pub2.publish(P_aw)
-		#, P_bw, P_cw, P_dw)
-		#self.pub1.publish("hi")
+		msg.x = P_pr[0]
+		msg.y = P_pr[1]
+		self.pub1.publish(msg)	#publish robot coord
+
+		msg.x = P_pw[0]
+		msg.y = P_pw[1]
+		self.pub2.publish(msg) #publish world coord
+
 if __name__ == '__main__':
 	rospy.init_node('transform', anonymous=True)
 	transform()

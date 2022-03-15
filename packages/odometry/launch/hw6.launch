@@ -1,0 +1,13 @@
+<launch>
+
+	<group ns="homework6">
+	
+		<node pkg="odometry" name="position_tracking" type="hw6.py"/>
+
+		
+		<node pkg="rqt_graph" name="rqt_graph" type="rqt_graph" />
+		<node pkg="rqt_console" name="rqt_console" type="rqt_console" />
+	
+	</group>
+	<node pkg="rostopic" name="rostopic" type="rostopic" output="screen" args="echo /dist_wheel"/>
+</launch>

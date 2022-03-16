@@ -1,7 +1,8 @@
 <launch>
 
+	<include file="$(find odometry_hw)/launch/odom_hw.launch"/>
 	<group ns="homework6">
-	
+		<param name='output_to_file' value='true' />
 		<node pkg="odometry" name="position_tracking" type="hw6.py"/>
 
 		
@@ -9,5 +10,5 @@
 		<node pkg="rqt_console" name="rqt_console" type="rqt_console" />
 	
 	</group>
-	<node pkg="rostopic" name="rostopic" type="rostopic" output="screen" args="echo /dist_wheel"/>
+	<node pkg="rostopic" name="rostopic" type="rostopic" output="screen" args="echo /pose"/>
 </launch>

@@ -1,0 +1,19 @@
+<launch>
+
+	<group ns="image pub">
+		<node pkg="image_processing_hw" name="image_pub" type="image_pub_all.py"/>
+	</group>
+
+	<group ns="homework7">
+		<param name='output_to_file' value='true' />
+		<node pkg="hw7_image_processing" name="image_processing" type="image_processing.py"/>
+
+		<node pkg="rqt_graph" name="rqt_graph" type="rqt_graph" />
+		<node pkg="rqt_console" name="rqt_console" type="rqt_console" />
+		
+		<node pkg="rqt_image_view" name="image_view_cropped" type="rqt_image_view" args="/image_cropped"/>
+		<node pkg="rqt_image_view" name="image_view_white" type="rqt_image_view" args="/image_white"/>
+		<node pkg="rqt_image_view" name="image_view_yellow" type="rqt_image_view" args="/image_yellow"/>
+	</group>
+	<node pkg="rostopic" name="rostopic" type="rostopic" output="screen" args="echo /image"/>
+</launch>

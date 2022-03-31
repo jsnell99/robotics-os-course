@@ -1,6 +1,6 @@
 <launch>
 
-	<group ns="image pub">
+	<group ns="image_pub">
 		<node pkg="image_processing_hw" name="image_pub" type="image_pub_all.py"/>
 	</group>
 

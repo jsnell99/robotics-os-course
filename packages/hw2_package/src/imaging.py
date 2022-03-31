@@ -8,7 +8,7 @@ from math import sin, cos
 
 class pubsubber:
 	def __init__(self):
-		rospy.Subscriber("/image", Image, self.callback)	#register subscriber with ROS
+		rospy.Subscriber("/image_pub/image", Image, self.callback)	#register subscriber with ROS
 		self.pub_cropped = rospy.Publisher('/image_cropped', Image, queue_size=10)	#register publisher with ROS
 		self.pub_yellow = rospy.Publisher('/image_yellow', Image, queue_size=10)
 		self.pub_white = rospy.Publisher('/image_white', Image, queue_size=10)

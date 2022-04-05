@@ -21,15 +21,16 @@ class pubsubber:
 		cv_img = self.bridge.imgmsg_to_cv2(msg, "bgr8") #convert to cv image using bridge
 		cv_cropped = cv_img[220:1000, 0:900]
 		ros_cropped = self.bridge.cv2_to_imgmsg(cv_cropped, "bgr8") #convert back to ROS image
-		self.pub_cropped.publish(ros_cropped)	#publish message
 
 		hsv_image = cv2.cvtColor(cv_cropped, cv2.COLOR_BGR2HSV)
 		yellow_filtered = cv2.inRange(hsv_image, (20,75,210), (100,250, 250))
 		white_filtered = cv2.inRange(hsv_image, (0,0,150), (130,30, 255))
 		yellow_output = self.bridge.cv2_to_imgmsg(yellow_filtered, "mono8") 
 		white_output = self.bridge.cv2_to_imgmsg(white_filtered, "mono8")
+
 		self.pub_yellow.publish(yellow_output)
 		self.pub_white.publish(white_output)
+		self.pub_cropped.publish(ros_cropped)	#publish message
 
 if __name__ == '__main__':
 	rospy.init_node('image_edit', anonymous=True)

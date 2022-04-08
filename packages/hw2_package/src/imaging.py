@@ -28,8 +28,8 @@ class pubsubber:
 		yellow_output = self.bridge.cv2_to_imgmsg(yellow_filtered, "mono8") 
 		white_output = self.bridge.cv2_to_imgmsg(white_filtered, "mono8")
 
-		self.pub_yellow.publish(yellow_output)
 		self.pub_white.publish(white_output)
+		self.pub_yellow.publish(yellow_output)
 		self.pub_cropped.publish(ros_cropped)	#publish message
 
 if __name__ == '__main__':

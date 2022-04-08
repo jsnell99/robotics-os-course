@@ -31,14 +31,14 @@ class pubsubber:
 
 	def callback(self, msg):
 		cv_cropped = self.bridge.imgmsg_to_cv2(msg, "bgr8") #convert to cv image using bridge
-		image_canny = cv2.Canny(cv_cropped,200 ,400)
+		image_canny = cv2.Canny(cv_cropped,200 ,400) #350, 450
 
 		edges_white = cv2.bitwise_and(image_canny, self.cv_white, mask = None) #combining canny edge detection and filtered image
 		edges_yellow = cv2.bitwise_and(image_canny, self.cv_yellow, mask = None)
 		#lines_white = cv2.HoughLinesP(edges_white, rho=1, theta=pi/180, threshold=10, lines=50, Min_theta=10, maxLineLength=22)
 		#lines_yellow = cv2.HoughLinesP(edges_yellow, rho=1, theta=pi/180, threshold=10, lines=50, Max_theta=10, max_theta=22)
-		lines_white = cv2.HoughLinesP(edges_white, 1, pi / 180, 2, None, pi/2, pi)	#10,25
-		lines_yellow = cv2.HoughLinesP(edges_yellow, 1, pi / 180, 2, None, pi/2, 2*pi)
+		lines_white = cv2.HoughLinesP(edges_white, 1, pi / 180, 10, None, 10, 22)	#7
+		lines_yellow = cv2.HoughLinesP(edges_yellow, 1, pi / 180, 5, None, 10, 22) #2
 		#draws set of lines on hough image
 		def output_lines(self, original_image, lines):
 			output = np.copy(original_image)

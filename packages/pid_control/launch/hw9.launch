@@ -1,0 +1,13 @@
+<launch>
+    <param name="controller_ready" type="String" value="true" />   
+	<include file="$(find controls_hw)/launch/start_dynamics.launch"/>
+
+
+	<node pkg="pid_control" name="pid_control" type="hw9_pid.py"/>
+
+	<node pkg="rqt_graph" name="rqt_graph" type="rqt_graph" />
+	<node pkg="rqt_console" name="rqt_console" type="rqt_console" />
+	
+
+
+</launch>

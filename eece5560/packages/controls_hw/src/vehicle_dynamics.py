@@ -73,6 +73,7 @@ if __name__ == '__main__':
             pub_xd.publish(vd.xd)
             pub_x.publish(vd.x)
             pub_d.publish(desired)
+            #rospy.logwarn(Float32(desired - vd.x))
             pub_error.publish(desired - vd.x)
             #rospy.logwarn("v=%f, x=%f, e=%f" % (vd.xd, vd.x, desired-vd.x))
             rate.sleep()

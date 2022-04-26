@@ -1,5 +1,7 @@
 <launch>
 
-    <node pkg="example_action_server" name="fibonacci" type="example_action_server_node.py"/>
+	<node pkg="example_action_server" name="fibonacci" type="example_action_server_node.py"/>
+	<node pkg="example_action_server" name="fibonacci_client" type="example_client.py"/>
 
+	<node pkg="rqt_graph" name="rqt_graph" type="rqt_graph"/>
 </launch>

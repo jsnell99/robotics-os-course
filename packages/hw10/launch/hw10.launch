@@ -1,0 +1,23 @@
+<launch>
+
+
+	<group ns="hw10">
+		<node pkg="hw10" name="client_node" type="hw10.py"/>
+
+	
+	</group>
+	
+	<group ns="service_node">
+
+		<node pkg="example_service" name="server" type="example_service_node.py"/>
+		
+	</group>
+
+	<group ns="action_node">
+		<node pkg="example_action_server" name="fibonacci" type="example_action_server_node.py"/>
+	</group>
+	
+	<node pkg="rqt_console" name="rqt_console" type="rqt_console"/>
+	<node pkg="rqt_graph" name="rqt_graph" type="rqt_graph"/>
+	
+</launch>
